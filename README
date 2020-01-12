@@ -1,5 +1,3 @@
-Name:Jiangxue Han
-Assignment9
 Program files:
 prog.c
 output.c//This is the file outputed by prog.c
@@ -23,12 +21,3 @@ the population of a region can save anually if everyone work to save 1 liter of
 water each day. The idea is that the original code prog.c is a facet and it
 produces the output.c code, as a drop of water, that tells people how much water
 (resources) we can save by just starting from small amounts.
-
-Known bug or deficiency:
-The huge int array is hard coded,(I do not know how to do it otherwise). The
-code is a bit verbose because of that. There are also other limits of indexes
-hardcoded.But I checked that the total length of my code is 1992 characters,
-so it's 8 characters right under 2000.My length for write up is a little less
-than 5 times the length of code (think about 4.5 times),because my code is
-long due to the large int array,but I think I explained each expression
-carefully so that you will be able to understand.
