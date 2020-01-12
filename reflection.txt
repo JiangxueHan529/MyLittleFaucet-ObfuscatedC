@@ -1,0 +1,12 @@
+Reflection on assignment9
+
+This assignment is very open ended and it took me some time to decide between the CO2
+choice and obfuscated c, and it also took me some time to decide what to do with
+obfuscated c. It took me a lot of time to format the output code into the shape of
+a drop of water (as close as possible), because the curve is nonlinear and I tried
+several ways to do it. I ended up with a shape kind of similar but not smooth enough
+because certain keywords can't be separated from middle. Also some of the way to shape
+this code is not super well written into a generic way, but rather hard coded. The idea
+does not involve much sophisticated knowledge that we learned, for instance, bit
+manipulation or even structs, but was pretty tedious to achieve. I think the good part
+is that it's fun to look at.

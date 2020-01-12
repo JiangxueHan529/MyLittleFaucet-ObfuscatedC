@@ -1,0 +1,231 @@
+Write up for my obfuscated c code for Assignment9
+Summary:
+In README, there is instruction on how to compile and run this piece of code.
+Basically,this code outputs another piece of code that calculates the amount of water
+a region's people can save in a year if every one works to save a liter per day. This
+code has white space in shape of a water faucet and the code generated has a shape of
+a water drop, which symbolize the idea. P.S. As suggested, I did use a lot of a, aa,
+aaa, b,bb,bbb etc.
+
+Detailed analysis of code:
+
+First there are the includes:
+#include<stdio.h>
+#include<stdlib.h>
+
+Then there's a signature of the second function I'm going to call:
+int* B(int* cc);
+This function takes a pointer to int (int arrary) and returns that array. The
+functionality of this function is going to be explained later.
+
+Then it's signature(start) of main function,I could have used other variable names to
+make this more obfuscated, but I realized the length of this signature is
+exactly adequate for building my shape so I just kept it:
+int main(int argc,char*argv[]){
+
+I opened the file in user command line argument argv[1] as write mode, so that I can
+write to this c file, which will contain the code I want to be able to perform what I
+want: calculate water saving accordign to population:
+FILE *a = fopen(argv[1], "w");
+
+Then I opened this file itself: prog.c, the reason to do this is that I can save some
+hard code by reading the first few lines of this code and put it to the output file,
+since both of them needs the includes and main signature:
+FILE *aa = fopen("prog.c", "r");
+
+I declared a char to hold the character read from this code itself:
+char aaa;
+
+I declared a char array of size 500 to hold information to be written to output file:
+char A[500];
+
+I have a counter to keep track of the next index to put char in in the array declared
+above,o is a bad name because it looks similar to 0:
+int o=0;
+
+I used a for loop to get includes from this code itself and put it into output file, the
+reason to put these characters first without putting them into the array to be put is
+that includes needs to have the new line character at the end and it wouldn't work if
+they were separtely into different lines, so I just put them at the upper left corner:
+for(int i =0;i < 37; i++){aaa = fgetc(aa);fputc(aaa,a);}
+
+I used another loop to create a few lines of white spaces:
+for(int p = 0; p < 4;
+p++){fputc('\n',a);}
+
+I moved the file pointer 16 later to skip the function B's signature:
+fseek(aa,16, SEEK_CUR);
+
+I get the main function signature from this code itself and put it into the array
+holder, I don't put it directly into output.c because I want it to be part of the
+water drop shape:
+for(int b = 0; b < 32; b++){aaa = fgetc(aa);A[o++]
+= aaa;}
+
+I created a big int array, which holds ascii values of chars I need. I know this is not
+much of encryption, but I can't think of a more concise of fancy way:
+int AA[]={105,
+102,40,97,114,103,99,33,61,50,41,       123,112,114,105,110,116,102,40,34,119,114,111,110,103,32,110,117,
+109,98,101,114,32,111,102,32,97 ,        114,103,117,109,101,110,116,115,34,41,59,114,101,116,117,114,110,
+32,45,49,59,125,108,111,110,103 ,        32,112,111,112,61,115,116,114,116,111,108,40,97,114,103,118,91,
+49,93,44,78,85,                                           76,76,44,49,48,41,59,112,114,105,110,116,102,40,34,49,
+102,32,101,97 ,                                              99,104,32,112,101,114,115,111,110,32,115,97,118,101,
+115,32,49,32,99                                                ,117,98,101,32,100,109,32,112,101,114,32,100,97,121
+,44,119,101,32,                                                  116,111,103,101,116,104,101,114,32,97,114,101,
+32,97,98,108,101,32,116,111,32,115,97,118,101,32,37,             46,50,102,32,99,117,98,101,32,109,101,116,101,
+114,32,111,102,32,119,97,116,101,114,32,112,101,114,32            ,121,101,97,114,33,34,44,40,112,111,112,42,46
+,48,48,49,41,42,51,54,53,41,59,114,101,116,117,114,110            ,32,48,59,125};
+
+I declared an integer to be passed into function B as parameter to keep track of how
+many lines of code I need in the output file in total:
+int z =0;
+
+I called function B and got the pointer to int array that contains information about
+how many characters to expect in each line of code. And because I passed in int pointer
+I can have access to how many lines of code in total(I even tried to call this int array
+B but apparently the conpiler rejects it and think the function call to B is callig the
+array instead of the actual function):
+int* BB = B(&z);
+
+I used a for loop to put all the char representation of the integers into the pre
+declared array:
+for(int d = 0;d < 230; d++){A[o++] =(char)AA[d];}
+
+I declared another integer as counter of how many characters have I written to my
+output c file, c is a
+good name choice probably because it is normally for char:
+int c = 0;
+
+I have a flag to tell me if at the beginning of this line is a literal string that
+needs a ", because I add a " at the end of the line if it's part of the string inside
+printf to concatenate string, and I want it at the beginning of next line if the next
+line is still part of printf:
+int bb =0;
+
+There is a for loop of length z( number of lines to output):
+for(int b = 0; b < z; b++){
+
+
+I used a for loop to decide how many spaces I need in this particular line before I
+start putting in code, and the way to decide this is to choose a horizontal spot as
+center of my code, which I chose as 38, and use this number to minus half of the length
+of this line of code:
+for(int h = 0; h < (38 - (1 +  (int)(BB[b]/2)));h++){fputc(' ',a);}
+
+I have another for loop in which in each iteration it deals with one line of code,
+BB[b] is number of characters in this particular line because BB is the array
+returned by function B that tells how many characters per line to create the shape:
+for(int k = 0;
+k < BB[b];k++){
+
+
+I have a case for if this particular character should be the last one in this line and it's not
+the first line, this should be special because we can't just split up the code wherever
+I want to:
+if(b > 1 && k == (BB[b] - 1)){
+This exists because I have to make sure each line is separated properly so that it does
+not affect the functionality of the outputed code.
+
+In the case where this character should be last one in this line, the first situation is
+that this character is part of the printf literal string part, and in this situation I
+add a " at the end and also one at the beginning of next line, and I do it by having the
+flag,(the limit is hard coded tho :( :
+if( ((c >= 51)&&
+(c <= 78)) ||((c >= 132)&& (c <= 232)) ){
+
+In the special case where it is a literal string char and it's the " itself, I write it
+down with a closing " too, I also set the flag on for next line,bb is the flag:
+if(A[c] == '"'){fputc(A[c++],a);fputc('"',a);bb = 1;break;}
+
+In other situations where it's a literal string character I put a " and turn flag on:
+bb = 1;fputc('"',a);break;}
+
+In other situations, I have to make sure that function names, variables, keywords are
+not separately into multiple lines by detecting certain punctuations. I continue to
+put characters in the same line until one of those punctions are reached, I have a break
+statement because I don't want another putchar at the end of the loop:
+else{while(A[c] != '.'&& A[c] != '(' && A[c] != ')' && A[c] != ',' &&A[c] != ';'
+&& A[c] != ' ' && A[c] != '[' &&  A[c]!= '*' && A[c] != '!'){fputc
+(A[c++],a);}break;}}
+
+if at the end of this loop flag is on, that means this is the situation where the last
+character is a literal string character and we need to put an extra " at the beginning
+of this line, after doing it I set the flag back to 0:
+if(bb == 1){
+fputc('"',a);}bb =0;
+
+Then it's the normal putchar for general case:
+fputc(A[c++], a);
+
+If it's at the end of the chars to be outputed (the last two characters), instead of
+going to another iteration I just put them at the end of the same line:
+if(c >=260){fputc(A[c++],a);fputc(A[c],a);break;}
+
+At the end of each line I put a newline character:
+fputc('\n',a);}
+
+I closed the two files and freed the malloc (still trying to have some sort of good
+coding habits, even in obfuscated c:
+fclose(a);
+fclose(aa);free(BB);
+
+Then there's function declation of B, whose purpose is to decide how many characters
+there should be per line to make the shape close to a drop of water, and this function
+returns a pointer to int array that contains that information:
+int* B(int* b){
+it takes a int pointer also because this is my way of return the second thing: the
+number of lines needed in total
+
+I first malloced the space for my array, I know the good way would be to allocate
+(sizeof(int)*30) but I just used the bad format of assuming 4 bytes for integer,
+which is the largest amount possible for integer, even if it's 2 bytes I think this
+can still work:
+int* a =malloc(4*30);
+
+I have an initial value for number of charactes per line:
+int aa = 1;
+
+I reset the value of number of lines to 0, even though I passed in 0 originally and
+this is not really necessary, but I can:
+*b= 0;
+
+for the first seven lines they increase by two per line, and I also increment the line
+counter, a here is the array malloced to be returned, since this is within the function,
+I get to use the same variable names that were already used in main to create confusion,
+aaa is the number of chars in a particular line and a, as described above, is name of my
+array to be returned:
+for(int i = 0; i < 7; i++){*(a++)
+= aa;(*b)++;aa += 2;}
+
+After this I decrement aaa for one because in the loop it automatically increased by
+two at the end, I only need to increase by one at this point:
+aa--;
+
+For the next six lines I increment by one to make the slope different from the top, I
+also increase line counter:
+for(int aaa = 0;aaa < 6; aaa++){*(a++) = aa;(*b)++;aa++;}
+
+Then I increased the line counter by 9 because I know I'm going to have nine extra lines:
+(*b) += 9;
+
+Then I wanted the remaining lines to have length 20,21,21,20,19,16,12,7,4, to make it
+a little messier I chose to increment and decrement multiple times at some points,very
+bad formatting:
+*(a++) = aa;
+*(a++) = 20;*(a++) = 21;*(a++) = aa;*(a++)= 19;*(a++) = 16;*(a++) = 12;*(a++) = 7
+;*(a++) = 4;
+
+Then I reset pointer to this int array to its beginning:
+a -= (*b)
+(b is the line counter)
+
+Last, I returned a, which is the pointer to int array which now contain information about
+the number of chars per line to make the shape.
+
+In conclusion, this piece of code tries to output to another c file with the ascii values
+of chars and some part of self reading into a particular shape decided by function B().
+
+PS. the orginal way I wrote this code was to follow good coding guidelines to make everything
+clear so that if there is a bug I would be able to fix easily, then I changed all the variable
+names to be stuff like a,aaa,etc. And I redistributed space and changed certain expressions
+to be more messy.

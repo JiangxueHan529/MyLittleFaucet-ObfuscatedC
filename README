@@ -1,0 +1,34 @@
+Name:Jiangxue Han
+Assignment9
+Program files:
+prog.c
+output.c//This is the file outputed by prog.c
+
+To compile and run the code, type in :
+gcc -o prog prog.c
+./prog output.c
+where output.c is an empty c file as output for prog.c
+Then, compile the output file :
+gcc -o output output.c
+./output number
+where number is the population of a particular region you live in.
+
+What my code does in general:
+When open prog.c, make sure the horizontal length is equal or more than 115,
+and then you can see the white space as the shape of a water facet. This code
+outputs another piece of code in the shape of a drop of water, (ideally it
+should be smooth, but due to limitation of number of chars, it's kind of
+discrete). And to run the output.c with population, it tells you how much water
+the population of a region can save anually if everyone work to save 1 liter of
+water each day. The idea is that the original code prog.c is a facet and it
+produces the output.c code, as a drop of water, that tells people how much water
+(resources) we can save by just starting from small amounts.
+
+Known bug or deficiency:
+The huge int array is hard coded,(I do not know how to do it otherwise). The
+code is a bit verbose because of that. There are also other limits of indexes
+hardcoded.But I checked that the total length of my code is 1992 characters,
+so it's 8 characters right under 2000.My length for write up is a little less
+than 5 times the length of code (think about 4.5 times),because my code is
+long due to the large int array,but I think I explained each expression
+carefully so that you will be able to understand.
